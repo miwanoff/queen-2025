@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #wrap {
+            overflow: hidden;
+        }
+
+        .card {
+            position: relative;
+            display: inline-block;
+            top: 0;
+            left: 0;
+            width: 80px;
+            height: 120px;
+            border: solid 2px orange;
+            background-color: rgb(228, 225, 69);
+            padding: 20px;
+            margin: 10px;
+            box-sizing: border-box;
+            text-align: center;
+            font-size: 40px;
+            color: red;
+            transition: all 1s;
+        }
+
+
+        #real_cards,
+        #played_cards {
+            border: 1px solid orange;
+            background-color: orange;
+            min-height: 300px;
+            z-index: 2;
+        }
+
+
+        #real_cards .card {
+            /* background-color: #6d695c; */
+            background-color: hsl(34, 53%, 82%);
+            background-image: repeating-linear-gradient(45deg, transparent 5px, hsla(197, 62%, 11%, 0.5) 5px, hsla(197, 62%, 11%, 0.5) 10px,
+                    hsla(5, 53%, 63%, 0) 10px, hsla(5, 53%, 63%, 0) 35px, hsla(5, 53%, 63%, 0.5) 35px, hsla(5, 53%, 63%, 0.5) 40px,
+                    hsla(197, 62%, 11%, 0.5) 40px, hsla(197, 62%, 11%, 0.5) 50px, hsla(197, 62%, 11%, 0) 50px, hsla(197, 62%, 11%, 0) 60px,
+                    hsla(5, 53%, 63%, 0.5) 60px, hsla(5, 53%, 63%, 0.5) 70px, hsla(35, 91%, 65%, 0.5) 70px, hsla(35, 91%, 65%, 0.5) 80px,
+                    hsla(35, 91%, 65%, 0) 80px, hsla(35, 91%, 65%, 0) 90px, hsla(5, 53%, 63%, 0.5) 90px, hsla(5, 53%, 63%, 0.5) 110px,
+                    hsla(5, 53%, 63%, 0) 110px, hsla(5, 53%, 63%, 0) 120px, hsla(197, 62%, 11%, 0.5) 120px, hsla(197, 62%, 11%, 0.5) 140px),
+                repeating-linear-gradient(135deg, transparent 5px, hsla(197, 62%, 11%, 0.5) 5px, hsla(197, 62%, 11%, 0.5) 10px,
+                    hsla(5, 53%, 63%, 0) 10px, hsla(5, 53%, 63%, 0) 35px, hsla(5, 53%, 63%, 0.5) 35px, hsla(5, 53%, 63%, 0.5) 40px,
+                    hsla(197, 62%, 11%, 0.5) 40px, hsla(197, 62%, 11%, 0.5) 50px, hsla(197, 62%, 11%, 0) 50px, hsla(197, 62%, 11%, 0) 60px,
+                    hsla(5, 53%, 63%, 0.5) 60px, hsla(5, 53%, 63%, 0.5) 70px, hsla(35, 91%, 65%, 0.5) 70px, hsla(35, 91%, 65%, 0.5) 80px,
+                    hsla(35, 91%, 65%, 0) 80px, hsla(35, 91%, 65%, 0) 90px, hsla(5, 53%, 63%, 0.5) 90px, hsla(5, 53%, 63%, 0.5) 110px,
+                    hsla(5, 53%, 63%, 0) 110px, hsla(5, 53%, 63%, 0) 140px, hsla(197, 62%, 11%, 0.5) 140px, hsla(197, 62%, 11%, 0.5) 160px);
+            /****/
+            background-size: 70px 120px;
+        }
+
+
+        #real_cards span {
+            display: none;
+        }
+
+
+        #played_cards {
+            border: 1px solid green;
+            background-color: green;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+
+        .effect {
+            /* height: 0; */
+            opacity: 0;
+            transition: all 1s;
+            transform: translateY(100%);
+        }
+
+
+        .move {
+            top: 280px;
+            transition: all 0.2s;
+        }
+
+
+        .rotate {
+            transition: all 3s ease;
+            opacity: 0;
+            transform: translate(500px, 800px) rotate(3600deg);
+        }
+
+
+        #win {
+            position: absolute;
+            display: none;
+            width: 40%;
+            top: 20%;
+            left: 30%;
+            height: 60%;
+            background-color: gold;
+            color: red;
+            text-align: center;
+            font-size: 60px;
+            z-index: 9999;
+            opacity: 0;
+            box-sizing: border-box;
+            padding-top: 10%;
+            border: 2px solid red;
+            transition: all 3s;
+        }
+    </style>
+
+</head>
+
+<body>
+    <h1>Queen</h1>
+    <div id="wrap">
+        <div id="info"></div>
+        <button id="reload">Reload</button>
+        <div id="cards"></div>
+        <div id="real_cards"></div>
+        <div id="played_cards" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+
+</html>
