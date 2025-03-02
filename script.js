@@ -44,14 +44,14 @@ function drop(event) {
   let data = event.dataTransfer.getData("text");
 
   event.target.appendChild(document.getElementById(data));
-  //play(cards, data);
-  console.log(data);
-  const number = +data.slice(3);
-  info.innerHTML = number + ": " + cards[number];
-  console.log(number);
-  console.log(cards);
-  removeCard(number);
-  console.log(cards);
+  play(cards, data);
+  // console.log(data);
+  // const number = +data.slice(3);
+  // info.innerHTML = number + ": " + cards[number];
+  // console.log(number);
+  // console.log(cards);
+  // removeCard(number);
+  // console.log(cards);
 }
 
 function generateCards(cards, cardsF, s = "r") {
@@ -73,6 +73,52 @@ function removeCard(number) {
   plCards.innerHTML = showCards(playedCards);
   generateCards(cards, realCards);
   generateCards(playedCards, playedCardsField, "p");
+}
+
+function myMove(elId) {
+  isGame = false;
+  let b = false;
+  number = Number(elId.substr(3));
+  if (number > cards.length || number < 0) {
+    throw new Error("Input error! Try again!");
+  }
+  //   if (checkWin("You ", cards[number])) {
+  //     b = true;
+  //   } else {
+  setTimeout(removeCard.bind(null, number), 200);
+  isGame = true;
+  // }
+  return b;
+}
+
+function computerMove() {
+  isGame = false;
+  let b = false;
+  number = Math.floor(Math.random() * cards.length);
+
+  console.log(number);
+
+  let computerCard = document.getElementById(`rc_${number}`);
+  console.log(computerCard.id);
+
+  // if (checkWin("I ", cards[number])) {
+  //   b = true;
+  //   return b;
+  // } else {
+  setTimeout(removeCard.bind(this, number), 200);
+  isGame = true;
+  //  }
+  return b;
+}
+
+function play(cards, elId) {
+  if (!isGame) return;
+  try {
+    if (myMove(elId)) return;
+    setTimeout(computerMove, 300);
+  } catch (ex) {
+    info.innerHTML = ex.message;
+  }
 }
 
 window.onload = function () {
