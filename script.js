@@ -4,6 +4,7 @@ let playedCards = [];
 let number = 0;
 let isGame = true;
 const cardsField = document.getElementById("cards");
+const plCards = document.getElementById("pl_cards");
 const realCards = document.getElementById("real_cards");
 const playedCardsField = document.getElementById("played_cards");
 const info = document.getElementById("info");
@@ -53,10 +54,10 @@ function drop(event) {
   console.log(cards);
 }
 
-function generateCards(cards, cardsF, s="") {
+function generateCards(cards, cardsF, s = "r") {
   cardsF.innerHTML = "";
   for (let i = 0; i < cards.length; i++) {
-    cardsF.innerHTML += `<div id="rc_${i}${s}" class="card" draggable="true" ondragstart="drag(event)"><span>${cards[i]}</span></div>`;
+    cardsF.innerHTML += `<div id="${s}c_${i}" class="card" draggable="true" ondragstart="drag(event)"><span>${cards[i]}</span></div>`;
   }
 }
 
@@ -66,9 +67,12 @@ function newPlay() {
 }
 
 function removeCard(number) {
+  playedCards.push(cards[number]);
   cards.splice(number, 1);
   cardsField.innerHTML = showCards(cards);
+  plCards.innerHTML = showCards(playedCards);
   generateCards(cards, realCards);
+  generateCards(playedCards, playedCardsField, "p");
 }
 
 window.onload = function () {
