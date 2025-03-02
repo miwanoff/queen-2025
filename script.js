@@ -24,7 +24,11 @@ function shuffle(arr) {
 
 shuffle(cards);
 
-cardsField.innerHTML = cards;
+cardsField.innerHTML = showCards(cards);
+
+function showCards(cards) {
+  return cards.join(", ");
+}
 
 function allowDrop(event) {
   event.preventDefault();
@@ -40,9 +44,16 @@ function drop(event) {
 
   event.target.appendChild(document.getElementById(data));
   //play(cards, data);
+  console.log(data);
+  const number = +data.slice(3);
+  info.innerHTML = number + ": " + cards[number];
+  console.log(number);
+  console.log(cards);
+  removeCard(number);
+  console.log(cards);
 }
 
-function generateCards(cards, cardsF, s) {
+function generateCards(cards, cardsF, s="") {
   cardsF.innerHTML = "";
   for (let i = 0; i < cards.length; i++) {
     cardsF.innerHTML += `<div id="rc_${i}${s}" class="card" draggable="true" ondragstart="drag(event)"><span>${cards[i]}</span></div>`;
@@ -54,7 +65,13 @@ function newPlay() {
   return false;
 }
 
+function removeCard(number) {
+  cards.splice(number, 1);
+  cardsField.innerHTML = showCards(cards);
+  generateCards(cards, realCards);
+}
+
 window.onload = function () {
-  generateCards(cards, realCards, "");
+  generateCards(cards, realCards);
   rel.addEventListener("click", newPlay);
 };
